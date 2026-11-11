@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=75,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inferedge"
+version = "0.1.0"
+description = "Offline, CPU-first language-model inference experiments and gateway"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.5"]
+transformers = ["torch>=2.6,<3", "transformers>=4.48,<5", "safetensors>=0.5,<1"]
+
+[project.scripts]
+inferedge-baseline = "inferedge.baseline:main"
+inferedge-benchmark = "inferedge.benchmark:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["local_model: optional integration test requiring local weights and ML dependencies"]
